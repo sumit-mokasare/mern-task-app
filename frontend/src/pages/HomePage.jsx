@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { object, z } from "zod";
 import { getZodError } from "../helper/getZodError.js";
+import { showToast } from "../helper/ShowToast.js";
 
 function HomePage() {
   const [formData, setFormData] = useState();
@@ -36,16 +37,19 @@ function HomePage() {
 
       const data = await responseData.json()
 
-      console.log("responce form sever", data);
+      if (!responseData.ok) {
+          throw new Error(data.message)
+      } 
+      // console.log("responce form sever", data);
+      setFormData({ })
+      showToast('success' ,data.message)
       
     } catch (error) {
       if (error instanceof z.ZodError) {
         const zodError = getZodError(error.errors);
         setError(zodError);
-        console.log("get erro from zod", zodError);
-      } else {
-        console.log(error);
-      }
+      } 
+        showToast('error',error.message)
     }
   };
 
@@ -59,6 +63,7 @@ function HomePage() {
           </label>
           <input
             onChange={handleInput}
+            value={formData?.title || ''}
             name="title"
             type="text"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -72,6 +77,7 @@ function HomePage() {
             Description
           </label>
           <textarea
+          value={formData?.description || ''}
             onChange={handleInput}
             name="description"
             rows="4"
