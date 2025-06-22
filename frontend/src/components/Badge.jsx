@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Badge = ({ props }) => {
+const [badgeColor , setBadgeColor ] = useState()
+
+  useEffect(()=>{
+
+   switch (props.status) {
+    case 'Pending':
+      setBadgeColor('blue')
+      break;
+   
+    case 'Runing':
+      setBadgeColor('yellow')
+      break;
+   
+    case 'Completed':
+      setBadgeColor('green')
+      break;
+   
+    case 'Failed':
+      setBadgeColor('red')
+      break;
+   
+    default:
+      break;
+   }
+
+  },[])
   return (
     <>
       {props.color === "blue" && (

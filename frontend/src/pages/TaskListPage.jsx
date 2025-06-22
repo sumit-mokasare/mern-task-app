@@ -9,9 +9,7 @@ const TaskListPage = () => {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/tasks/get-all-task`
       );
-
       const data = await response.json();
-      // console.log('asdfas', data);
   
       setTask(data);
     };

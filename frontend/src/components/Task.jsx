@@ -3,19 +3,20 @@ import Badge from './Badge'
 import {Link} from 'react-router-dom'
 
 export const Task = ({props}) => {
+  
   return (
       <div className="border p-3 rounded-md mb-5">
         <h3 className="text-lg font-semibold">
           <span className="me-2">
             {props.title}
           </span>
-          <Badge props={{ color: "blue", text: "Pending" }} />
+          <Badge props={{ color: "blue", text: props.status }} />
         </h3>
         <p className="line-clamp-2 mb-3">
          {props.description}
         </p>
         <div className="flex gap-5 items-center">
-          <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center inline-flex items-center p-2">
+          <Link to={`/show-task/${props._id}`} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  text-center inline-flex items-center p-2">
 
             <svg
               className="w-5 h-5"
