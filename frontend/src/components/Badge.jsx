@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-const Badge = ({ props }) => {
+const Badge = ({ status , text }) => {
 const [badgeColor , setBadgeColor ] = useState()
 
   useEffect(()=>{
 
-   switch (props.status) {
+   switch (status) {
     case 'Pending':
       setBadgeColor('blue')
       break;
    
-    case 'Runing':
+    case 'Running':
       setBadgeColor('yellow')
       break;
    
@@ -23,30 +23,31 @@ const [badgeColor , setBadgeColor ] = useState()
       break;
    
     default:
+      console.log('nothing to in status');
       break;
    }
 
   },[])
   return (
     <>
-      {props.color === "blue" && (
+      {badgeColor === "blue" && (
         <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
-          {props.text}
+          {text}
         </span>
       )}
-      {props.color === "red" && (
+      {badgeColor === "red" && (
         <span className="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded ">
-          {props.text}
+          {text}
         </span>
       )}
-      {props.color === "green" && (
+      {badgeColor === "green" && (
         <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded ">
-          {props.text}
+          {text}
         </span>
       )}
-      {props.color === "yellow" && (
+      {badgeColor === "yellow" && (
         <span className="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded ">
-          {props.text}
+          {text}
         </span>
       )}
     </>

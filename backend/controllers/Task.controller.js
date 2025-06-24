@@ -128,6 +128,13 @@ export const deleteTask = async (req, res) => {
 
         const deletedTask = await TaskModel.findByIdAndDelete(taskid)
 
+        if (!deletedTask) {
+            return res.status(400).json({
+                message: "deleted task not found",
+                success: true
+            })
+        }
+
         res.status(200).json({
             message: "task deleted succesfully",
             success: true

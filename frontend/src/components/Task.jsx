@@ -2,15 +2,18 @@ import React  from 'react'
 import Badge from './Badge' 
 import {Link} from 'react-router-dom'
 
-export const Task = ({props}) => {
-  
+export const Task = ({props , onDelete}) => {
+
+  const handleDelete = async ()=>{
+      await onDelete(props._id)
+  }
   return (
       <div className="border p-3 rounded-md mb-5">
         <h3 className="text-lg font-semibold">
           <span className="me-2">
             {props.title}
           </span>
-          <Badge props={{ color: "blue", text: props.status }} />
+          <Badge status={props.status} text={props.status} />
         </h3>
         <p className="line-clamp-2 mb-3">
          {props.description}
@@ -39,7 +42,7 @@ export const Task = ({props}) => {
               />
             </svg>
           </Link>
-          <button className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm  text-center inline-flex items-center p-2">
+          <button onClick={handleDelete} className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm  text-center inline-flex items-center p-2">
             <svg
               className="w-5 h-5"
               aria-hidden="true"
